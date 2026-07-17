@@ -291,7 +291,7 @@ export default function Home() {
                             }
                             {size?.offer != "" && (
                               <span className="font-semibold text-[var(--color-text)]">
-                                {size.offer} EGP
+                                {size.priceOffer} EGP
                               </span>
 
                             )
