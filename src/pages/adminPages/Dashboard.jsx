@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
-import { CountUp } from "react-countup";
 import {
   AreaChart, Area,
   XAxis, YAxis,
@@ -26,9 +25,52 @@ const fadeUp = {
   }),
 };
 
+// ---- Safe custom count-up (no external dependency) ----
+function useCountUp(end, duration = 1100) {
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (end == null || isNaN(end)) {
+      setValue(0);
+      return;
+    }
+    let startTime = null;
+    let frame;
+    const startValue = 0;
+
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      setValue(startValue + (end - startValue) * eased);
+      if (progress < 1) {
+        frame = requestAnimationFrame(step);
+      } else {
+        setValue(end);
+      }
+    };
+
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [end, duration]);
+
+  return value;
+}
+
+function AnimatedNumber({ value, decimals = 0, prefix = "" }) {
+  const animated = useCountUp(value);
+  const formatted = animated.toLocaleString("en-US", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
+  return <>{prefix}{formatted}</>;
+}
+
 function Card({ icon: Icon, label, value, type, sub, loading, index }) {
   const isMoney = type === "money";
-  const decimals = isMoney && value != null && !Number.isInteger(value) ? 2 : 0;
+  const numericValue = typeof value === "number" ? value : Number(value);
+  const hasValue = value != null && !isNaN(numericValue);
+  const decimals = isMoney && hasValue && !Number.isInteger(numericValue) ? 2 : 0;
 
   return (
     <motion.div
@@ -51,18 +93,11 @@ function Card({ icon: Icon, label, value, type, sub, loading, index }) {
           transition={{ duration: 1.2, repeat: Infinity }}
           className="h-6 w-2/3 bg-border sm:h-7"
         />
-      ) : value == null ? (
+      ) : !hasValue ? (
         <p className="text-[17px] font-semibold leading-none text-text sm:text-[26px]">—</p>
       ) : (
         <p className="text-[17px] font-semibold leading-none text-text sm:text-[26px]">
-          <CountUp
-            end={value}
-            duration={1.1}
-            separator=","
-            decimals={decimals}
-            prefix={isMoney ? "$" : ""}
-            preserveValue
-          />
+          <AnimatedNumber value={numericValue} decimals={decimals} prefix={isMoney ? "$" : ""} />
         </p>
       )}
 
