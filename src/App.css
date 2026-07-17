@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+*{
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+:root{
+  /* Light */
+  --color-bg: #F8F5F0;        /* الخلفية */
+  --color-card: #FFFCF8;      /* الكروت */
+  --color-text: #1E1E1C;      /* النص */
+  --color-muted: #7A766F;     /* النصوص الثانوية */
+  --color-border: #E8E1D8;    /* الحدود */
+  --color-accent: #25352E;    /* الأخضر الغامق */
+}
+
+.dark{
+  /* Dark */
+  --color-bg: #0E1715;
+  --color-card: #16211E;
+  --color-text: #F8F6F2;
+  --color-muted: #A5AAA4;
+  --color-border: #2B3834;
+  --color-accent: #D8C3A5;    /* البيج الذهبي */
+}
+
+body{
+  background:var(--color-bg);
+}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  font-family:"Inter",sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+.logo{
+  font-family:"Fraunces",serif;
+}
+
+@theme{
+  --color-bg: var(--color-bg);
+  --color-card: var(--color-card);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-border: var(--color-border);
+  --color-accent: var(--color-accent);
+}
+
+.logo{
+  font-family:"Lobster",cursive;
+}
