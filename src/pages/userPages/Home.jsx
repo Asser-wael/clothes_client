@@ -126,7 +126,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {offer.offer ==true && (
+                {offer.offer == true && (
                   <div className="flex items-center gap-2">
                     {offer.name}
                     <span className="text-gray-400 line-through">
@@ -282,9 +282,20 @@ export default function Home() {
                             className="flex items-center justify-between border-t border-[var(--color-border)] py-2 text-[13px]"
                           >
                             <span className="text-[var(--color-muted)]">{size.name}</span>
-                            <span className="font-semibold text-[var(--color-text)]">
-                              {size.price} EGP
-                            </span>
+                            {size?.offer == "" && (
+                              <span className="font-semibold text-[var(--color-text)]">
+                                {size.price} EGP
+                              </span>
+
+                            )
+                            }
+                            {size?.offer != "" && (
+                              <span className="font-semibold text-[var(--color-text)]">
+                                {size.offer} EGP
+                              </span>
+
+                            )
+                            }
                           </div>
                         ))}
                     </div>
