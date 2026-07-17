@@ -281,7 +281,7 @@ export default function Home() {
                             key={idx}
                             className="flex items-center justify-between border-t border-[var(--color-border)] py-2 text-[13px]"
                           >
-                            <span className="text-[var(--color-muted)]">{size.size}</span>
+                            <span className="text-[var(--color-muted)]">{size.name}</span>
                             <span className="font-semibold text-[var(--color-text)]">
                               {size.price} EGP
                             </span>
