@@ -8,7 +8,7 @@ import {
   FaTimesCircle,
   FaInfoCircle,
   FaExclamationTriangle,
-  FaFirstOrder
+  FaFirstOrder,
 } from "react-icons/fa";
 
 export default function Toast() {
@@ -27,36 +27,29 @@ export default function Toast() {
     }
   }, [visible, dispatch]);
 
+  // ألوان متسقة مع الـ theme بتاع الموقع (--color-*)
+  // بدل الألوان العشوائية الشفافة، بقى كل نوع عنده لون تمييز بسيط
+  // (أيقونة + شريط جانبي) فوق كارت محايد بألوان الـ theme.
   const styles = {
     success: {
-      bg: "bg-green-500/10",
-      border: "border-green-500/30",
       icon: FaCheckCircle,
-      iconColor: "text-green-500",
+      accent: "#3F8F5F",
     },
     error: {
-      bg: "bg-red-500/10",
-      border: "border-red-500/30",
       icon: FaTimesCircle,
-      iconColor: "text-red-500",
+      accent: "#C1483D",
     },
     order: {
-      bg: "bg-blue-500/10",
-      border: "border-red-blue/30",
       icon: FaFirstOrder,
-      iconColor: "text-white-500",
+      accent: "var(--color-accent)",
     },
     info: {
-      bg: "bg-sky-500/10",
-      border: "border-sky-500/30",
       icon: FaInfoCircle,
-      iconColor: "text-sky-500",
+      accent: "#4A8FBF",
     },
     warning: {
-      bg: "bg-yellow-500/10",
-      border: "border-yellow-500/30",
       icon: FaExclamationTriangle,
-      iconColor: "text-yellow-500",
+      accent: "#C99A3E",
     },
   };
 
@@ -70,16 +63,11 @@ export default function Toast() {
           initial={{ opacity: 0, y: -20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
-          className={`
-            fixed top-5 right-5 z-50
-            flex items-center gap-3 px-4 py-3 rounded-xl
-            border backdrop-blur-md shadow-xl
-            bg-[var(--color-card)] text-[var(--color-text)]
-            ${toast.bg} ${toast.border}
-          `}
+          className="fixed right-5 top-5 z-50 flex max-w-xs items-center gap-3 border border-[var(--color-border)] bg-[var(--color-card)] py-3 pl-4 pr-5 text-[var(--color-text)] shadow-xl sm:max-w-sm"
+          style={{ borderLeft: `3px solid ${toast.accent}` }}
         >
-          <Icon className={`text-lg ${toast.iconColor}`} />
-          <span className="text-sm font-medium">{message}</span>
+          <Icon className="shrink-0 text-lg" style={{ color: toast.accent }} />
+          <span className="text-[13px] font-medium leading-snug">{message}</span>
         </motion.div>
       )}
     </AnimatePresence>
