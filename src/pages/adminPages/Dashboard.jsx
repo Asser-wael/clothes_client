@@ -353,7 +353,7 @@ export default function Dashboard() {
             <table className="w-full min-w-[480px]">
               <thead className="border-b border-border">
                 <tr className="text-left text-[11px] uppercase tracking-[0.06em] text-muted sm:text-[12px] sm:tracking-[0.08em]">
-                  <th className="px-3 py-3 sm:px-5 sm:py-4">Table</th>
+                  <th className="px-3 py-3 sm:px-5 sm:py-4">Name</th>
                   <th className="px-3 py-3 sm:px-5 sm:py-4">Price</th>
                   <th className="px-3 py-3 sm:px-5 sm:py-4">Status</th>
                   <th className="px-3 py-3 sm:px-5 sm:py-4">Date</th>
@@ -371,7 +371,7 @@ export default function Dashboard() {
                     className="cursor-pointer border-b border-border transition-colors hover:bg-[var(--color-bg)]"
                   >
                     <td className="whitespace-nowrap px-3 py-3 text-sm font-medium text-text sm:px-5 sm:py-4">
-                      Table {o.tableNumber}
+                       {o.shippingAddress?.fullName}
                     </td>
 
                     <td className="whitespace-nowrap px-3 py-3 text-sm font-semibold text-[var(--color-accent)] sm:px-5 sm:py-4">
