@@ -52,7 +52,7 @@ export default function Cart() {
           </p>
 
           <button
-            onClick = {() => navigate("products") }
+            onClick = {() => navigate("/products") }
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[var(--color-accent)] text-[var(--color-bg)] font-medium text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[var(--color-accent)]/10"
           >
             Explore Products
