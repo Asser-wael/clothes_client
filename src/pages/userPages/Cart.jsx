@@ -33,25 +33,36 @@ export default function Cart() {
     0
   );
 
-  if (cart.length === 0) {
-    return (
-      <div className="min-h-[70vh] flex flex-col justify-center items-center">
-        <FaCartShopping
-          size={70}
-          className="text-[var(--color-muted)]"
-        />
+import { Link } from "react-router-dom";
+import { FaCartShopping } from "react-icons/fa6"; 
 
-        <h2 className="text-3xl font-bold text-[var(--color-text)] mt-5">
-          Your Cart Is Empty
+if (cart.length === 0) {
+  return (
+    <div className="min-h-[75vh] flex items-center justify-center p-4 bg-[var(--color-bg)] transition-colors duration-300">
+      <div className="max-w-md w-full bg-[var(--color-card)] border border-[var(--color-border)] rounded-2xl p-8 md:p-12 text-center shadow-sm backdrop-blur-sm flex flex-col items-center justify-center">
+        
+        <div className="w-24 h-24 rounded-full bg-[var(--color-bg)] border border-[var(--color-border)] flex items-center justify-center mb-6 text-[var(--color-muted)] animate-pulse">
+          <FaCartShopping size={36} className="opacity-80" />
+        </div>
+
+        <h2 className="font-serif text-3xl md:text-4xl font-semibold text-[var(--color-text)] mb-3 tracking-wide">
+          Your cart is empty
         </h2>
 
-        <p className="text-[var(--color-muted)] mt-2">
-          Add some delicious meals 🍕
+        <p className="text-[var(--color-muted)] text-sm md:text-base mb-8 max-w-[280px] leading-relaxed">
+          Looks like you haven't added anything to your cart yet. Let's find something special for you.
         </p>
-      </div>
-    );
-  }
 
+        <Link
+          to="/products"
+          className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-[var(--color-accent)] text-[var(--color-bg)] font-medium text-sm transition-all duration-300 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] shadow-md shadow-[var(--color-accent)]/10"
+        >
+          Explore Products
+        </Link>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
 
