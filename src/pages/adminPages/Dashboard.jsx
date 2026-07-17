@@ -35,11 +35,11 @@ function Card({ icon: Icon, label, value, sub, loading, index }) {
       initial="hidden"
       animate="show"
       variants={fadeUp}
-      className="flex flex-col gap-2 border border-border bg-card p-5"
+      className="flex flex-col gap-2 border border-border bg-card p-4 sm:p-5"
     >
       <div className="flex items-center gap-2 text-muted">
         {Icon && <Icon size={15} />}
-        <span className="text-[12px] font-medium uppercase tracking-[0.08em]">{label}</span>
+        <span className="text-[11px] font-medium uppercase tracking-[0.08em] sm:text-[12px]">{label}</span>
       </div>
 
       {loading ? (
@@ -49,10 +49,10 @@ function Card({ icon: Icon, label, value, sub, loading, index }) {
           className="h-7 w-2/3 bg-border"
         />
       ) : (
-        <p className="text-[26px] font-semibold leading-none text-text">{value}</p>
+        <p className="text-[20px] font-semibold leading-none text-text sm:text-[26px]">{value}</p>
       )}
 
-      {sub && <span className="text-[12px] text-muted">{sub}</span>}
+      {sub && <span className="text-[11px] text-muted sm:text-[12px]">{sub}</span>}
     </motion.div>
   );
 }
@@ -70,7 +70,7 @@ function PeriodToggle({ type, dispatch }) {
         <button
           key={key}
           onClick={() => dispatch(action())}
-          className="relative flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium uppercase tracking-[0.06em] text-muted transition-colors duration-200 hover:text-text"
+          className="relative flex items-center gap-1.5 px-2.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.06em] text-muted transition-colors duration-200 hover:text-text sm:px-3 sm:text-[12px]"
         >
           {type === key && (
             <motion.span
@@ -178,10 +178,10 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-bg px-5 py-8 text-text sm:px-8">
+    <div className="min-h-screen bg-bg px-4 py-6 text-text sm:px-5 sm:py-8 md:px-8">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-border pb-8">
         <div>
-          <h1 className="font-serif text-[32px] italic text-text sm:text-[38px]">Dashboard</h1>
+          <h1 className="font-serif text-[26px] italic text-text sm:text-[32px] md:text-[38px]">Dashboard</h1>
           <p className="mt-1 text-[13px] text-muted">Welcome back, Admin.</p>
         </div>
 
@@ -204,8 +204,8 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="border border-border bg-card p-5 sm:p-6">
-        <div className="mb-5 flex items-center justify-between">
+      <div className="border border-border bg-card p-4 sm:p-5 sm:p-6">
+        <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-[13px] font-semibold uppercase tracking-[0.1em] text-text">
             Revenue &amp; orders
           </h2>
@@ -240,7 +240,7 @@ export default function Dashboard() {
             </motion.div>
           ) : (
             <motion.div key="chart" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={260}>
                 <AreaChart data={chartData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
                   <defs>
                     <linearGradient id="gRev" x1="0" y1="0" x2="0" y2="1">
@@ -256,10 +256,10 @@ export default function Dashboard() {
                     tick={{ fill: "var(--color-muted)", fontSize: 10 }}
                     axisLine={false}
                     tickLine={false}
-                    width={52}
+                    width={48}
                     tickFormatter={(v) => "$" + (v >= 1000 ? (v / 1000).toFixed(1) + "k" : v)}
                   />
-                  <YAxis yAxisId="ord" orientation="right" tick={{ fill: "var(--color-muted)", fontSize: 10 }} axisLine={false} tickLine={false} width={36} />
+                  <YAxis yAxisId="ord" orientation="right" tick={{ fill: "var(--color-muted)", fontSize: 10 }} axisLine={false} tickLine={false} width={32} />
                   <Tooltip content={<ChartTooltip />} />
                   <Area
                     yAxisId="rev"
@@ -289,7 +289,7 @@ export default function Dashboard() {
           )}
         </AnimatePresence>
         <div className="mt-8 border border-border bg-card">
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-4 sm:px-5">
             <h2 className="text-[13px] font-semibold uppercase tracking-[0.08em] text-text">
               Latest Orders
             </h2>
@@ -303,13 +303,13 @@ export default function Dashboard() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full min-w-[480px]">
               <thead className="border-b border-border">
                 <tr className="text-left text-[12px] uppercase tracking-[0.08em] text-muted">
-                  <th className="px-5 py-4">Table</th>
-                  <th className="px-5 py-4">Price</th>
-                  <th className="px-5 py-4">Status</th>
-                  <th className="px-5 py-4">Date</th>
+                  <th className="px-4 py-4 sm:px-5">Table</th>
+                  <th className="px-4 py-4 sm:px-5">Price</th>
+                  <th className="px-4 py-4 sm:px-5">Status</th>
+                  <th className="px-4 py-4 sm:px-5">Date</th>
                 </tr>
               </thead>
 
@@ -323,15 +323,15 @@ export default function Dashboard() {
                     onClick={() => navigate(`/admin/orders/${o._id}`)}
                     className="cursor-pointer border-b border-border transition-colors hover:bg-[var(--color-bg)]"
                   >
-                    <td className="px-5 py-4 font-medium text-text">
+                    <td className="whitespace-nowrap px-4 py-4 font-medium text-text sm:px-5">
                       Table {o.tableNumber}
                     </td>
 
-                    <td className="px-5 py-4 font-semibold text-[var(--color-accent)]">
+                    <td className="whitespace-nowrap px-4 py-4 font-semibold text-[var(--color-accent)] sm:px-5">
                       L.E {o.totalPrice}
                     </td>
 
-                    <td className="px-5 py-4">
+                    <td className="whitespace-nowrap px-4 py-4 sm:px-5">
                       <span
                         className={`rounded-full px-3 py-1 text-[11px] font-semibold capitalize ${getStatusStyle(
                           o.status
@@ -341,7 +341,7 @@ export default function Dashboard() {
                       </span>
                     </td>
 
-                    <td className="px-5 py-4 text-sm text-muted">
+                    <td className="whitespace-nowrap px-4 py-4 text-sm text-muted sm:px-5">
                       {new Date(o.createdAt).toLocaleDateString()}
                     </td>
                   </motion.tr>

@@ -109,9 +109,9 @@ export default function Customuse() {
   ];
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-6xl px-5 py-10 text-[var(--color-text)] md:px-8">
+    <div className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 text-[var(--color-text)] sm:px-5 sm:py-10 md:px-8">
       <div className="mb-8 border-b border-[var(--color-border)] pb-8">
-        <h1 className="font-serif text-[32px] italic text-[var(--color-text)] sm:text-[38px]">
+        <h1 className="font-serif text-[26px] italic text-[var(--color-text)] sm:text-[32px] md:text-[38px]">
           Customise
         </h1>
         <p className="mt-1 text-[13px] text-[var(--color-muted)]">
@@ -119,10 +119,10 @@ export default function Customuse() {
         </p>
       </div>
 
-      <div className="flex flex-col items-start gap-10 lg:flex-row">
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-10">
         {/* Sidebar */}
         <motion.aside {...fadeUp} className="w-full shrink-0 lg:sticky lg:top-6 lg:w-72">
-          <div className="border border-[var(--color-border)] p-5">
+          <div className="border border-[var(--color-border)] p-4 sm:p-5">
             <h2 className="mb-5 text-[12px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)]">
               New category
             </h2>
@@ -171,24 +171,24 @@ export default function Customuse() {
               { label: "Popular", value: popularList?.length ?? 0 },
               { label: "Products", value: normalList?.length ?? 0 },
             ].map((s) => (
-              <div key={s.label} className="flex flex-col items-center gap-1 p-4 lg:flex-row lg:justify-between">
-                <span className="text-[20px] font-semibold text-[var(--color-accent)]">{s.value}</span>
-                <span className="text-[12px] text-[var(--color-muted)]">{s.label}</span>
+              <div key={s.label} className="flex flex-col items-center gap-1 p-3 sm:p-4 lg:flex-row lg:justify-between">
+                <span className="text-[18px] font-semibold text-[var(--color-accent)] sm:text-[20px]">{s.value}</span>
+                <span className="text-[11px] text-[var(--color-muted)] sm:text-[12px]">{s.label}</span>
               </div>
             ))}
           </div>
         </motion.aside>
 
         {/* Main */}
-        <div className="min-w-0 flex-1">
-          <div className="mb-8 flex w-fit gap-6 border-b border-[var(--color-border)]">
+        <div className="min-w-0 flex-1 w-full">
+          <div className="mb-8 flex w-full gap-4 overflow-x-auto border-b border-[var(--color-border)] sm:w-fit sm:gap-6">
             {tabs.map((t) => {
               const active = activeTab === t.key;
               return (
                 <button
                   key={t.key}
                   onClick={() => setActiveTab(t.key)}
-                  className={`relative flex items-center gap-2 pb-3 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${
+                  className={`relative flex shrink-0 items-center gap-2 pb-3 text-[13px] font-medium uppercase tracking-[0.08em] transition-colors ${
                     active ? "text-[var(--color-text)]" : "text-[var(--color-muted)] hover:text-[var(--color-text)]"
                   }`}
                 >
@@ -208,11 +208,17 @@ export default function Customuse() {
               {categories?.map((cat) => (
                 <div
                   key={cat._id}
-                  className="group relative flex flex-col items-center bg-[var(--color-card)] p-5 text-center"
+                  className="group relative flex flex-col items-center bg-[var(--color-card)] p-4 text-center sm:p-5"
                 >
+                  {/*
+                    FIX: زرار الحذف كان opacity-0 وبيظهر بالـ hover بس،
+                    فكان مختفي تمامًا على الموبايل. دلوقتي ظاهر دايمًا
+                    تحت md بخلفية بسيطة عشان يبان فوق الصورة، وبالـ hover
+                    بس من md لفوق زي الأول.
+                  */}
                   <button
                     onClick={() => handleDeleteCategory(cat._id)}
-                    className="absolute right-2.5 top-2.5 flex h-6 w-6 items-center justify-center text-[var(--color-muted)] opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100"
+                    className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-bg)]/80 text-[var(--color-muted)] opacity-100 backdrop-blur-sm transition-opacity hover:text-red-500 md:bg-transparent md:opacity-0 md:group-hover:opacity-100"
                     aria-label="Delete"
                   >
                     <FaTrash size={11} />
@@ -221,16 +227,16 @@ export default function Customuse() {
                   {cat.image ? (
                     <img
                       src={`${import.meta.env.VITE_API_URL}/uploads/${cat.image}`}
-                      className="h-14 w-14 rounded-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
+                      className="h-12 w-12 rounded-full object-cover grayscale transition-all duration-300 group-hover:grayscale-0 sm:h-14 sm:w-14"
                       alt={cat.name}
                     />
                   ) : (
-                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-bg)]">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-bg)] sm:h-14 sm:w-14">
                       <HiOutlinePhotograph className="text-2xl text-[var(--color-muted)]" />
                     </div>
                   )}
 
-                  <p className="mt-3 line-clamp-1 text-[13px] font-medium uppercase tracking-[0.04em] text-[var(--color-text)]">
+                  <p className="mt-3 line-clamp-1 text-[12px] font-medium uppercase tracking-[0.04em] text-[var(--color-text)] sm:text-[13px]">
                     {cat.name}
                   </p>
                 </div>
@@ -241,7 +247,7 @@ export default function Customuse() {
           {activeTab === "popular" && (
             <motion.div {...fadeUp}>
               {popularList?.length === 0 ? (
-                <div className="flex flex-col items-center justify-center gap-3 border border-[var(--color-border)] py-20 text-[var(--color-muted)]">
+                <div className="flex flex-col items-center justify-center gap-3 border border-[var(--color-border)] px-4 py-16 text-center text-[var(--color-muted)] sm:py-20">
                   <HiOutlineFire className="text-4xl opacity-30" />
                   <p className="text-sm">No popular products yet. Add some from All products.</p>
                 </div>
@@ -249,7 +255,7 @@ export default function Customuse() {
                 <div className="grid grid-cols-1 gap-px border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 xl:grid-cols-3">
                   {popularList?.map((item) => (
                     <div key={item._id} className="bg-[var(--color-card)]">
-                      <div className="relative h-44 overflow-hidden">
+                      <div className="relative h-40 overflow-hidden sm:h-44">
                         <img
                           src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}`}
                           className="h-full w-full object-cover"
@@ -278,28 +284,29 @@ export default function Customuse() {
           {activeTab === "products" && (
             <motion.div {...fadeUp}>
               {normalList?.length === 0 ? (
-                <div className="flex flex-col items-center justify-center gap-3 border border-[var(--color-border)] py-20 text-[var(--color-muted)]">
+                <div className="flex flex-col items-center justify-center gap-3 border border-[var(--color-border)] px-4 py-16 text-center text-[var(--color-muted)] sm:py-20">
                   <BiPackage className="text-4xl opacity-30" />
                   <p className="text-sm">All products are already marked as popular.</p>
                 </div>
               ) : (
                 <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
                   {normalList?.map((item) => (
-                    <div key={item._id} className="flex items-center gap-4 bg-[var(--color-card)] p-4">
+                    <div key={item._id} className="flex items-center gap-3 bg-[var(--color-card)] p-3 sm:gap-4 sm:p-4">
                       <img
                         src={`${import.meta.env.VITE_API_URL}/uploads/${item.image}`}
-                        className="h-14 w-14 shrink-0 object-cover"
+                        className="h-12 w-12 shrink-0 object-cover sm:h-14 sm:w-14"
                         alt={item.name}
                       />
                       <div className="min-w-0 flex-1">
-                        <p className="line-clamp-1 text-[14px] font-semibold">{item.name}</p>
-                        <p className="mt-0.5 text-[12px] text-[var(--color-muted)]">{item.Category}</p>
+                        <p className="line-clamp-1 text-[13px] font-semibold sm:text-[14px]">{item.name}</p>
+                        <p className="mt-0.5 text-[11px] text-[var(--color-muted)] sm:text-[12px]">{item.Category}</p>
                       </div>
                       <button
                         onClick={() => handleAddPopular(item._id)}
-                        className="flex shrink-0 items-center gap-1.5 border border-[var(--color-text)] px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--color-text)] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-bg)]"
+                        className="flex shrink-0 items-center gap-1.5 border border-[var(--color-text)] px-2.5 py-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--color-text)] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-bg)] sm:px-3"
                       >
-                        <HiOutlineFire size={13} /> Popular
+                        <HiOutlineFire size={13} />
+                        <span className="hidden sm:inline">Popular</span>
                       </button>
                     </div>
                   ))}

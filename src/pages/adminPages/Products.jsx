@@ -52,11 +52,11 @@ export default function Products() {
   const isLoading = loadingAdd || loadingProducts || loadingEdit;
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-5 py-10 text-[var(--color-text)] md:px-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-8 text-[var(--color-text)] sm:px-5 sm:py-10 md:px-8">
       {/* Header */}
       <div className="mb-8 flex flex-col gap-6 border-b border-[var(--color-border)] pb-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="font-serif text-[32px] italic text-[var(--color-text)] sm:text-[38px]">
+          <h1 className="font-serif text-[26px] italic text-[var(--color-text)] sm:text-[32px] md:text-[38px]">
             Products
           </h1>
           <p className="mt-1 text-[13px] text-[var(--color-muted)]">
@@ -86,14 +86,14 @@ export default function Products() {
       {isLoading && (
         <div className="grid grid-cols-1 gap-px border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-96 w-full animate-pulse bg-[var(--color-card)]" />
+            <div key={i} className="h-80 w-full animate-pulse bg-[var(--color-card)] sm:h-96" />
           ))}
         </div>
       )}
 
       {/* Empty state */}
       {!isLoading && filteredProducts?.length === 0 && (
-        <div className="flex min-h-[240px] items-center justify-center border border-[var(--color-border)]">
+        <div className="flex min-h-[240px] items-center justify-center border border-[var(--color-border)] px-4 text-center">
           <p className="text-[14px] text-[var(--color-muted)]">
             No products match your search.
           </p>
@@ -131,25 +131,29 @@ export default function Products() {
                     </span>
                   )}
 
-                  {/* Hover actions */}
-                  <div className="absolute inset-x-0 bottom-0 flex justify-center gap-2 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  {/*
+                    FIX: كانت الأزرار opacity-0 وبتظهر بس بالـ hover،
+                    والموبايل مفيهوش hover فكانت مختفية خالص.
+                    دلوقتي: ظاهرة دايمًا تحت md، وبالـ hover بس من md لفوق (ديسكتوب).
+                  */}
+                  <div className="absolute inset-x-0 bottom-0 flex justify-center gap-2 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-100 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100">
                     <button
                       onClick={() => dispatch(viewProduct(item._id))}
-                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-[var(--color-text)] transition hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
+                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-[var(--color-text)] shadow-sm transition hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
                       aria-label="View product"
                     >
                       <FiEye size={16} />
                     </button>
                     <button
                       onClick={() => dispatch(setIdToEdit(item._id))}
-                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-[var(--color-text)] transition hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
+                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-[var(--color-text)] shadow-sm transition hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
                       aria-label="Edit product"
                     >
                       <FiEdit2 size={16} />
                     </button>
                     <button
                       onClick={() => dispatch(removeProduct(item._id))}
-                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-red-500 transition hover:bg-red-500 hover:text-white"
+                      className="flex h-9 w-9 items-center justify-center bg-[var(--color-bg)] text-red-500 shadow-sm transition hover:bg-red-500 hover:text-white"
                       aria-label="Delete product"
                     >
                       <FiTrash2 size={16} />
@@ -158,8 +162,8 @@ export default function Products() {
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-1 flex-col p-5">
-                  <h2 className="text-[16px] font-semibold text-[var(--color-text)]">
+                <div className="flex flex-1 flex-col p-4 sm:p-5">
+                  <h2 className="text-[15px] font-semibold text-[var(--color-text)] sm:text-[16px]">
                     {item.name}
                   </h2>
 
