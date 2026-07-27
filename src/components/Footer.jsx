@@ -1,90 +1,87 @@
-import { FaGamepad, FaPhone, FaUser, FaCrown } from "react-icons/fa";
+import React from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { FaInstagram, FaTwitter, FaFacebookF } from "react-icons/fa";
 
 export default function Footer() {
   const navigate = useNavigate();
 
-  const navItems = [
-    { name: "HOME", path: "/home" },
-    { name: "GAMES", path: "/games" },
-    { name: "DEALS", path: "/deals" },
-    { name: "ORDERS", path: "/orders" },
+  const links = [
+    { id: 1, title: "Home", to: "/" },
+    { id: 2, title: "Products", to: "/products" },
+    { id: 3, title: "Offers", to: "/offers" },
+    { id: 4, title: "Orders", to: "/orders" },
   ];
 
   return (
-    <footer className="w-full bg-black text-white border-t border-white/10 mt-20">
-      
-      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
+    <motion.footer
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="border-t border-[var(--color-border)] bg-[var(--color-card)]"
+    >
+      <div className="mx-auto flex flex-col gap-8 px-6 py-12 lg:px-10">
+        <div className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
+          <h2
+            onClick={() => navigate("/")}
+            className="cursor-pointer font-serif text-2xl italic tracking-tight text-[var(--color-text)]"
+          >
+            Provisions&nbsp;Co.
+          </h2>
 
-        {/* ================= BRAND ================= */}
-        <div>
-          <div className="flex items-center gap-2 text-green-400 text-2xl font-black">
-            <FaGamepad />
-            GAME STORE
-          </div>
-
-          <p className="text-zinc-400 text-sm mt-4 leading-relaxed">
-            Premium gaming platform for buying accounts,
-            <br /> deals and games instantly.
-          </p>
-        </div>
-
-        {/* ================= NAV ================= */}
-        <div>
-          <h3 className="text-lg font-bold mb-4 text-green-400">
-            Navigation
-          </h3>
-
-          <div className="flex flex-col gap-2">
-            {navItems.map((item) => (
+          <div className="flex flex-wrap items-center gap-6">
+            {links.map((item) => (
               <button
-                key={item.name}
-                onClick={() => navigate(item.path)}
-                className="text-zinc-400 hover:text-green-400 transition text-left"
+                key={item.id}
+                onClick={() => navigate(item.to)}
+                className="text-[12px] font-medium uppercase tracking-[0.14em] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
               >
-                {item.name}
+                {item.title}
               </button>
             ))}
           </div>
+
+          <div className="flex items-center gap-4">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="text-[15px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="text-[15px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="text-[15px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-text)]"
+            >
+              <FaFacebookF />
+            </a>
+          </div>
         </div>
 
-        {/* ================= INFO ================= */}
-        <div className="space-y-4">
-
-          <h3 className="text-lg font-bold text-green-400">
-            Developers & Owner
-          </h3>
-
-          {/* OWNER */}
-          <div className="flex items-center gap-2 text-zinc-300">
-            <FaCrown className="text-yellow-400" />
-            <span>Owner: Moataz</span>
-          </div>
-          <div className="flex items-center gap-2 text-zinc-300">
-            <FaPhone className="text-blue-400" />
-            
-            <span>:01111191289</span>
-          </div>
-
-          {/* DEVELOPER */}
-          <div className="flex items-center gap-2 text-zinc-300">
-            <FaUser className="text-green-400" />
-            <span>Developer: Asser Wael</span>
-          </div>
-
-          {/* PHONE */}
-          <div className="flex items-center gap-2 text-zinc-300">
-            <FaPhone className="text-blue-400" />
-            <span>01129691951</span> (dev)
-          </div>
-
+        <div className="flex flex-col items-start justify-between gap-3 border-t border-[var(--color-border)] pt-6 sm:flex-row sm:items-center">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+            © {new Date().getFullYear()} Provisions Co. All rights reserved.
+          </p>
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+            Curated daily · Delivered fresh
+          </p>
         </div>
       </div>
 
-      {/* ================= BOTTOM BAR ================= */}
-      <div className="border-t border-white/10 py-4 text-center text-zinc-500 text-sm">
-        © {new Date().getFullYear()} Game Store. All rights reserved.
-      </div>
-    </footer>
+      <style>{`
+        .font-serif {
+          font-family: "Fraunces", serif;
+        }
+      `}</style>
+    </motion.footer>
   );
 }

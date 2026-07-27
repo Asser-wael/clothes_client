@@ -7,6 +7,7 @@ import { RiAdminFill } from "react-icons/ri";
 import { clearView } from "../../features/usersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import Footer from "../../components/Footer";
 const TICKER_TEXT = "Curated daily  ·  Sourced with care  ·  Delivered fresh  ·  ";
 
 export default function Layout() {
@@ -211,6 +212,7 @@ export default function Layout() {
       <main>
         <Outlet />
       </main>
+      <Footer/>
       {/* here */}
       <style>{`
         .ticker-track {
