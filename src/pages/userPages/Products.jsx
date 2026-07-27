@@ -165,12 +165,12 @@ export default function Products() {
                 className="group flex w-full flex-row overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] transition-all duration-200 hover:border-accent/40 hover:shadow-md lg:flex-col"
               >
                 {/* Image Container (مضبوط بالكامل ومستقر الأبعاد) */}
-                <div className="relative m-2  max-lg:h-[120px]   max-lg:w-[120px] shrink-0 cursor-pointer overflow-hidden rounded-xl bg-neutral-100 lg:m-0 lg:aspect-[4/3] lg:h-auto lg:w-full lg:rounded-none">
+                <div className="relative m-2 aspect-[4/5]  max-lg:h-[120px]   max-lg:w-[120px] shrink-0 cursor-pointer overflow-hidden rounded-xl bg-neutral-100 lg:m-0 lg:aspect-[4/3] lg:h-auto lg:w-full lg:rounded-none">
                   <img
                     onClick={() => dispatch(setView(product))}
                     src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`}
                     alt={product.name}
-                    className="h-full w-full object-cover  lg:scale-90  transition-transform duration-500 group-hover:scale-100"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-100"
                   />
                   {product.offer && (
                     <span className="absolute left-2 top-2 z-10 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">
