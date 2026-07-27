@@ -170,7 +170,7 @@ export default function Products() {
                     onClick={() => dispatch(setView(product))}
                     src={`${import.meta.env.VITE_API_URL}/uploads/${product.image}`}
                     alt={product.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover  lg:scale-90  transition-transform duration-500 group-hover:scale-100"
                   />
                   {product.offer && (
                     <span className="absolute left-2 top-2 z-10 rounded-full bg-red-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-sm">

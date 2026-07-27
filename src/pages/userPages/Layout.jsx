@@ -72,10 +72,10 @@ export default function Layout() {
           {/* Desktop Menu */}
           <div className="hidden items-center gap-8 lg:flex">
             {menuItems.map((item, index) => {
-              const active = location.pathname === item.to;
+              const active = location.pathname === item?.to;
               return (
                 <motion.button
-                  key={item.id}
+                  key={item?.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -83,13 +83,13 @@ export default function Layout() {
                     delay: 0.12 + (menuItems.length - 1 - index) * 0.06,
                     ease: "easeOut",
                   }}
-                  onClick={() => navigate(item.to)}
+                  onClick={() => navigate(item?.to)}
                   className={`relative py-2 text-[13px] font-medium uppercase tracking-[0.14em] transition-colors ${active
                     ? "text-[var(--color-text)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-text)]"
                     }`}
                 >
-                  {item.title}
+                  {item?.title}
                   {active && (
                     <span className="absolute -bottom-[1px] left-0 h-[1.5px] w-full bg-[var(--color-accent)]" />
                   )}
@@ -128,7 +128,7 @@ export default function Layout() {
               />
               {cart.length > 0 && (
                 <span className="absolute -right-2 -top-2 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[var(--color-accent)] px-1 text-[9px] font-semibold text-[var(--color-bg)]">
-                  {cart.length}
+                  {cart?.length}
                 </span>
               )}
             </motion.div>
@@ -181,7 +181,7 @@ export default function Layout() {
                 <div className="flex flex-col">
                   {menuItems.map((item, index) => (
                     <motion.button
-                      key={item.id}
+                      key={item?.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
@@ -190,8 +190,8 @@ export default function Layout() {
                         ease: "easeOut",
                       }}
                       onClick={() => {
-                        if (item.to === "/") dispatch(clearView());
-                        navigate(item.to);
+                        if (item?.to === "/") dispatch(clearView());
+                        navigate(item?.to);
                         setOpen(false);
                       }}
                       className={`border-b border-[var(--color-border)] py-4 text-left text-[13px] font-medium uppercase tracking-[0.14em] ${location.pathname === item.to
@@ -199,7 +199,7 @@ export default function Layout() {
                         : "text-[var(--color-muted)]"
                         }`}
                     >
-                      {item.title}
+                      {item?.title}
                     </motion.button>
                   ))}
                 </div>
