@@ -8,7 +8,7 @@ import UserView from "../../components/UserView";
 import { addToCart } from "../../features/cartSlice";
 import { setNotification } from "../../features/notificationSlice";
 import { CiHeart, CiSearch } from "react-icons/ci";
-
+import { FaStar, FaRegStar, FaStarHalfAlt } from "react-icons/fa";
 export default function Products() {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
