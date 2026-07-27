@@ -97,8 +97,8 @@ export default function Products() {
           whileTap={{ scale: 0.96 }}
           onClick={() => dispatch(setCat("All"))}
           className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${cat === "All"
-              ? "border-accent bg-accent text-white"
-              : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
+            ? "border-accent bg-accent text-white"
+            : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
             }`}
         >
           ALL
@@ -122,8 +122,8 @@ export default function Products() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => dispatch(setCat(category.name))}
                 className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${cat === category.name
-                    ? "border-accent bg-accent text-white"
-                    : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
+                  ? "border-accent bg-accent text-white"
+                  : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
                   }`}
               >
                 {category.name.toUpperCase()}
@@ -153,6 +153,13 @@ export default function Products() {
             const effectivePrice = product.offer
               ? firstSize?.priceOffer
               : firstSize?.price;
+            const avgRating =
+              product.comment?.length > 0
+                ? (
+                  product.comment.reduce((sum, c) => sum + (c.stars ?? 0), 0) /
+                  product.comment.length
+                ).toFixed(1)
+                : null;
 
             return (
               <motion.div
@@ -193,13 +200,24 @@ export default function Products() {
                       >
                         <CiHeart
                           className={`text-xl transition-colors duration-150 ${isInWishlist(product._id)
-                              ? "text-red-500"
-                              : "text-[var(--color-muted)]"
+                            ? "text-red-500"
+                            : "text-[var(--color-muted)]"
                             }`}
                         />
                       </button>
                     </div>
+                    <div className="mt-1 flex items-center gap-1">
+                      <FaStar className="text-xs text-yellow-400" />
+                      <span className="text-xs font-medium text-[var(--color-muted)]">
+                        {avgRating || "New"}
+                      </span>
 
+                      {product.comment?.length > 0 && (
+                        <span className="text-xs text-[var(--color-muted)]">
+                          ({product.comment.length})
+                        </span>
+                      )}
+                    </div>
                     {/* Description - Desktop */}
                     <p className="mt-1 hidden text-xs leading-relaxed text-[var(--color-muted)] lg:block">
                       {expandedId === product._id

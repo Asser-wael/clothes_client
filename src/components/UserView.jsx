@@ -67,7 +67,9 @@ export default function UserView() {
     const effectivePrice = view.offer
         ? selectedSize?.priceOffer
         : selectedSize?.price;
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="min-h-screen bg-[var(--color-bg)]">
             <div className="mx-auto max-w-6xl px-5 py-8 md:px-8">
@@ -207,7 +209,7 @@ export default function UserView() {
                         )}
 
                         <button
-                            disabled={!view.availability || selectedSize?.count == 0 }
+                            disabled={!view.availability || selectedSize?.count == 0}
                             className="mt-6 w-full border border-[var(--color-text)] bg-[var(--color-text)] py-4 text-[13px] font-semibold uppercase tracking-[0.14em] text-[var(--color-bg)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
                             onClick={() => {
                                 if (selectedColor === null) {
