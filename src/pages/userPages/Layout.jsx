@@ -9,6 +9,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineShoppingBag } from "react-icons/md";
 const TICKER_TEXT = "Curated daily  ·  Sourced with care  ·  Delivered fresh  ·  ";
 
+const menuContainerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.09,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const menuItemVariants = {
+  hidden: { opacity: 0, x: 40, y: -8 },
+  show: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
 export default function Layout() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,12 +86,18 @@ export default function Layout() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden items-center gap-8 lg:flex">
+          <motion.div
+            variants={menuContainerVariants}
+            initial="hidden"
+            animate="show"
+            className="hidden items-center gap-8 lg:flex"
+          >
             {menuItems.map((item) => {
               const active = location.pathname === item.to;
               return (
-                <button
+                <motion.button
                   key={item.id}
+                  variants={menuItemVariants}
                   onClick={() => navigate(item.to)}
                   className={`relative py-2 text-[13px] font-medium uppercase tracking-[0.14em] transition-colors ${active
                     ? "text-[var(--color-text)]"
@@ -82,10 +108,10 @@ export default function Layout() {
                   {active && (
                     <span className="absolute -bottom-[1px] left-0 h-[1.5px] w-full bg-[var(--color-accent)]" />
                   )}
-                </button>
+                </motion.button>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Right */}
           <div className="flex items-center gap-5">
@@ -150,10 +176,16 @@ export default function Layout() {
                   </button>
                 </div>
 
-                <div className="flex flex-col">
+                <motion.div
+                  variants={menuContainerVariants}
+                  initial="hidden"
+                  animate="show"
+                  className="flex flex-col"
+                >
                   {menuItems.map((item) => (
-                    <button
+                    <motion.button
                       key={item.id}
+                      variants={menuItemVariants}
                       onClick={() => {
                         if (item.to === "/") dispatch(clearView());
                         navigate(item.to);
@@ -165,9 +197,9 @@ export default function Layout() {
                         }`}
                     >
                       {item.title}
-                    </button>
+                    </motion.button>
                   ))}
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </>
