@@ -138,7 +138,7 @@ export default function Cart() {
                       Size: {item.size}
                     </p>
                     <p className="text-[var(--color-muted)] mt-2">
-                      Size: {item.color}
+                      color: {item.color}
                     </p>
 
                     <div className="mt-3 text-2xl font-black text-[var(--color-accent)]">

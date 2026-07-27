@@ -96,24 +96,23 @@ export default function Products() {
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
           onClick={() => dispatch(setCat("All"))}
-          className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
-            cat === "All"
+          className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${cat === "All"
               ? "border-accent bg-accent text-white"
               : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
-          }`}
+            }`}
         >
           ALL
         </motion.button>
 
         {loadingCategories
           ? Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                className="h-8 w-20 animate-pulse rounded-full bg-[var(--color-card)]"
-              />
-            ))
+            <div
+              key={i}
+              className="h-8 w-20 animate-pulse rounded-full bg-[var(--color-card)]"
+            />
+          ))
           : categories?.length > 0
-          ? categories.map((category, index) => (
+            ? categories.map((category, index) => (
               <motion.button
                 key={category._id}
                 initial={{ opacity: 0 }}
@@ -122,16 +121,15 @@ export default function Products() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => dispatch(setCat(category.name))}
-                className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${
-                  cat === category.name
+                className={`cursor-pointer rounded-full border px-4 py-1.5 text-sm font-medium transition-colors duration-150 ${cat === category.name
                     ? "border-accent bg-accent text-white"
                     : "border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-text)] hover:border-accent hover:text-accent"
-                }`}
+                  }`}
               >
                 {category.name.toUpperCase()}
               </motion.button>
             ))
-          : <p className="text-sm text-[var(--color-muted)]">No categories found</p>}
+            : <p className="text-sm text-[var(--color-muted)]">No categories found</p>}
       </div>
 
       {/* Products grid */}
@@ -194,11 +192,10 @@ export default function Products() {
                         aria-label="Toggle wishlist"
                       >
                         <CiHeart
-                          className={`text-xl transition-colors duration-150 ${
-                            isInWishlist(product._id)
+                          className={`text-xl transition-colors duration-150 ${isInWishlist(product._id)
                               ? "text-red-500"
                               : "text-[var(--color-muted)]"
-                          }`}
+                            }`}
                         />
                       </button>
                     </div>
@@ -207,9 +204,8 @@ export default function Products() {
                     <p className="mt-1 hidden text-xs leading-relaxed text-[var(--color-muted)] lg:block">
                       {expandedId === product._id
                         ? product.description
-                        : `${product.description?.slice(0, 80)}${
-                            product.description?.length > 80 ? "..." : ""
-                          }`}
+                        : `${product.description?.slice(0, 80)}${product.description?.length > 80 ? "..." : ""
+                        }`}
                     </p>
 
                     {product.description?.length > 80 && (
@@ -265,6 +261,7 @@ export default function Products() {
                             name: product.name,
                             image: product.image,
                             size: firstSize?.name,
+                            color: product?.colors[0],
                             price: effectivePrice,
                           })
                         );
