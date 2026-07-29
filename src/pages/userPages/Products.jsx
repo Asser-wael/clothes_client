@@ -57,7 +57,9 @@ export default function Products() {
     dispatch(getAllProducts());
     dispatch(getAllCategories());
   }, [dispatch]);
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   if (view) {
     return <UserView />;
   }

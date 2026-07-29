@@ -90,7 +90,9 @@ export default function Checkout() {
       setSubmitting(false);
     }
   };
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
   return (
     <motion.form
       initial={{ opacity: 0, y: 12 }}
