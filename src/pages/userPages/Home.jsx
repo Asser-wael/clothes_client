@@ -138,14 +138,6 @@ export default function Home() {
                     </span>
                   </div>
                 )}
-                {offer?.offer == false && (
-                  <div className="flex items-center gap-2">
-                    {offer.name}
-                    <span className="text-gray-400 line-through">
-                      {offer.sizes[0].price}
-                    </span>
-                  </div>
-                )}
               </motion.div>
             ))
           )}
@@ -290,14 +282,14 @@ export default function Home() {
                             className="flex items-center justify-between border-t border-[var(--color-border)] py-2 text-[13px]"
                           >
                             <span className="text-[var(--color-muted)]">{size.name}</span>
-                            {size?.offer == "" && (
+                            {size?.offer == null && (
                               <span className="font-semibold text-[var(--color-text)]">
                                 {size.price} EGP
                               </span>
 
                             )
                             }
-                            {size?.offer != "" && (
+                            {size?.offer != null && (
                               <span className="font-semibold text-[var(--color-text)]">
                                 {size.priceOffer} EGP
                               </span>
