@@ -293,7 +293,7 @@ export default function Products() {
                         );
                       }}
                       disabled={firstSize.count == 0}
-                      className="shrink-0 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:bg-orange-600 lg:px-4 lg:py-2"
+                      className="shrink-0 rounded-lg disabled:cursor-not-allowed bg-accent px-3 py-1.5 text-xs font-medium text-white transition-colors duration-150 hover:bg-orange-600 lg:px-4 lg:py-2"
                     >
                       Add
                     </motion.button>
