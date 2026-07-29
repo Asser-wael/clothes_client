@@ -126,7 +126,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {offer.offer == true && (
+                {offer?.offer == true && (
                   <div className="flex items-center gap-2">
                     {offer.name}
                     <span className="text-gray-400 line-through">
@@ -135,6 +135,14 @@ export default function Home() {
 
                     <span className="font-semibold text-[var(--color-accent)]">
                       {offer.sizes[0].priceOffer}
+                    </span>
+                  </div>
+                )}
+                {offer?.offer == false && (
+                  <div className="flex items-center gap-2">
+                    {offer.name}
+                    <span className="text-gray-400 line-through">
+                      {offer.sizes[0].price}
                     </span>
                   </div>
                 )}
